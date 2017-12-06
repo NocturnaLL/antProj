@@ -44,7 +44,7 @@ class Anthill
 
   def calculateChances(arr_of_chances)
     index = arr_of_chances.index(arr_of_chances.max)
-    type = 10
+    type = "ant"
     if(index == 0)
       type = "Foreger"
     elsif(index == 1)

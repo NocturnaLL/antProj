@@ -11,11 +11,33 @@ class Ant
 end
 
 class Forager
-  attr_reader :type
+  attr_accessor :type, :agility, :health
   def initialize
     puts "Foreger created..."
     @type = "Forager"
+    @agility = 1
+    @health = 1
   end
+
+  def findFood?(cell)
+    find = false
+    if (cell.food)
+      find = true
+      if(@agility<2)
+        levelUp()
+      end
+    end
+    find
+  end
+
+  def levelUp()
+    @agility = @agility+1
+  end
+
+  def die()
+    @health = 0
+  end
+
   def isForager?
     @type == "Forager"
   end
@@ -31,10 +53,37 @@ end
 
 
 class Warrior
-  attr_reader :type
+  attr_accessor :type, :strenght
   def initialize
     puts "Warrior created..."
     @type = "Warrior"
+    @strenght = 1
+    @health = 1
+  end
+  def levelUp()
+    @strenght = @strenght + 1
+  end
+
+  def interractWarrior(warrior)
+    r = rand(2)
+    if (r==1)
+      @warrior.levelUp()
+      warrior.die()
+    else
+      warrior.levelUp()
+      @warrior.die()
+    end
+  end
+
+  def interractForeger(foreger)
+    r = rand(2)
+    if (r==1)
+      foreger.die()
+    end
+  end
+
+  def die
+    warrior.health = 0
   end
   def isForager?
     @type == "Forager"
